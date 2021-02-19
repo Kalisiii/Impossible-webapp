@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://kit.fontawesome.com/486587c22a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+
+    <title>Admin panel</title>
+</head>
+<body style=" background-image: url('images/pozadina8.jpg');">
+
+
+<nav class="navbar navbar-expand-lg navbar-fixed-top navbar-light" style="background-color: mediumturquoise;   border-radius: 0;border: 0; top: 0;width: 100%} " >
+    <a id="logo" class="navbar-brand" href="/">Impossible jewelry</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+
+                <select  class="custom-select" id="kategorije"  style="width: 11em; border-radius: 15px;   margin-right: 5px; ">
+                    <option  name="kategorija" value="0">Izaberi kategoriju</option>
+                    {{#each kategorija}}
+                        <option name="kategorija" value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            </li>
+            <li class="nav-item">
+                <button  class="btn" id="izbrisi" onclick="izbrisi(this)" style="margin-right:5px;border-color: black; background-color: white; color: black;text-decoration: none;"> Izbrisi kategoriju</button>
+            </li>
+
+            <li class="nav-item">
+                <button class="btn" style=" margin-right:5px; border-color: black; background-color: white;"> <a href="/dodajKategoriju" style="color: black;text-decoration: none;">Dodaj kategoriju</a></button>
+
+            </li>
+
+
+            <li class="nav-item">
+                <button class="btn" style="margin-right: 5px; border-color: black; background-color: white;"> <a href="/dodajProizvod" style="color: black;text-decoration: none;">Dodaj novi proizvod</a></button>
+            </li>
+
+            <li class="nav-item">
+                <button class="btn" style="margin-right: 5px; border-color: black; background-color: white;"> <a href="/odjava" style="color: black;text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Log out</a></button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+<table class="table table-info">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">IME</th>
+        <th scope="col">CENA</th>
+        <th scope="col">OPIS</th>
+        <th scope="col">VIDLJIVOST</th>
+        <th scope="col">IZMENA</th>
+        <th scope="col">BRISANJE</th>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+    {{#if proizvod}}
+        {{#each proizvod}}
+            <tr>
+                <th scope="col">{{this.id}}</th>
+                <th scope="col">{{this.ime}}</th>
+                <th scope="col">{{this.cena}} RSD</th>
+                <th scope="col">{{this.opis}}</th>
+                <th scope="col">VIDLJIV<input type="checkbox" onchange="vidljivost(this)" data-id="{{this.id}}" {{#if this.vidljivost}}checked{{/if}}></th>
+                <th scope="col"><a href="/izmena/{{this.id}}" style="color: black;">IZMENA</a> </th>
+                <th scope="col"><button class="btn" value="{{this.id}}" onclick="obrisi(this)" id="obrisi" style="border-color: black; background-color: mediumturquoise;">BRISANJE</button></th>
+            </tr>
+        {{/each}}
+    {{/if}}
+    </tbody>
+</table>
+
+<script>
+
+    function prikazPodataka(lista) {
+        let tabela = document.querySelector("#tbody");
+        tabela.innerHTML="";
+        let html = "";
+        for (let proizvod of lista) {
+            html += `<tr>
+                <th scope="row">${proizvod.id}</th>
+                <td>${proizvod.ime}</td>
+                <td>${proizvod.cena}</td>
+                <td>${proizvod.opis}</td>
+                <td><input type="checkbox" onchange="vidljivost(this)" data-id="${proizvod.id}" checked="${proizvod.vidljivost}"></td>
+                <td><a href="/izmena/${proizvod.id}">Izmena</a></td>
+                  <th scope="row"><button value="${proizvod.id}" onclick="obrisi(this)" id="obrisi">Izbrisi</button></th>
+                </tr>`;
+        }
+        tabela.innerHTML=html;
+
+    }
+    document.querySelector("#kategorije").onchange = function () {
+        let kategorije = document.querySelector("#kategorije");
+        $.ajax({
+            url: "/uzmiProizvod",
+            method: "GET",
+            data: {
+                "kategorija": kategorije.value
+            },
+            success: function (response) {
+                let elementi = JSON.parse(response);
+                prikazPodataka(elementi);
+            }
+        })
+    }
+
+
+
+    function obrisi(btn) {
+
+        if (confirm("Da li zelite da obrisete proizvod?") == true) {
+            $.ajax({
+                url: "/obrisi",
+                method: "GET",
+                data: {
+                    "id": btn.value
+                },
+                success: function (response) {
+                    alert(response);
+                    location.reload();
+                }
+            })
+        }}
+
+
+    function izbrisi(btn) {
+
+        if (confirm("Da li zelite da obrisete kategoriju?") == true) {
+            $.ajax({
+                url: "/izbrisiKategoriju",
+                method: "GET",
+                data: {
+                    "kategorija": kategorije.value
+                },
+                success: function (response) {
+                    alert(response);
+                }
+            })
+        }
+    }
+
+    function vidljivost(el) {
+        $.ajax({
+            url:"/promeniVidljivost",
+            method:"POST",
+            data: {
+                "id":el.getAttribute("data-id"),"vidljivost":el.checked
+            },
+            success:function ()
+            {
+                alert("Promenjena vidljivost")
+            }
+        })
+    }
+
+
+
+</script>
+
+
+
+
+<script src="http://127.0.0.1:5000/js/jquery.js"></script>
+
+
+
+</body>
+</html>
