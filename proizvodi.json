@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "slika": "images/30.PNG",
+    "ime": "HEART Wood",
+    "cena": 1.955,
+    "opis": " Srce drvena ogrlica sa plavom epoxy smolom",
+    "vidljivost": true
+  },
+  {
+    "id": 2,
+    "slika": "images/50.PNG",
+    "ime": "HEART Pure",
+    "cena": 1.955,
+    "opis": "Srce providna ogrlica od epoxy smole",
+    "vidljivost": true
+  },
+  {
+    "id": 3,
+    "slika": "images/58.PNG",
+    "ime": "STONES Red",
+    "cena": 1.655,
+    "opis": "Drvena ogrlica sa crvenim kamencicima u epoxy smoli",
+    "vidljivost": true
+  },
+  {
+    "id": 4,
+    "slika": "images/60.PNG",
+    "ime": "STONES Blue",
+    "cena": 1.655,
+    "opis": "Plavi kamencici u drvenoj ogllici od epoxy smole",
+    "vidljivost": true
+  },
+  {
+    "id": 5,
+    "slika": "images/65.PNG",
+    "ime": "TEAR Luxury",
+    "cena": 2.355,
+    "opis": "Suza zlatno crna ogrlica u obliku suze od epoxy smole ",
+    "vidljivost": true
+  },
+  {
+    "id": 6,
+    "slika": "images/67.PNG",
+    "ime": "TEAR Blue",
+    "cena": 2.005,
+    "opis": "Suza orglica sa crnim drvetom i kraljevsko plavom epoxy smolom",
+    "vidljivost": true
+  },
+  {
+    "id": 7,
+    "slika": "images/72.PNG",
+    "ime": "PURPLE Haze",
+    "cena": 1.655,
+    "opis": "Ljubičasta epoxy smola sa belim drvetom",
+    "vidljivost": true
+  },
+  {
+    "id": 8,
+    "slika": "images/krst1.PNG",
+    "ime": "CROSS Galaxy",
+    "cena": 2.155,
+    "opis": "Krst od borovog drveta sa sjajnom bojom smolom trule višnje",
+    "vidljivost": true
+  },
+  {
+    "id": 9,
+    "slika": "images/krst3.PNG",
+    "ime": "CROSS Golden",
+    "cena": 2.155,
+    "opis": "Krst od crnog drveta sa zlatnom epoxy smolom",
+    "vidljivost": true
+  },
+  {
+    "id": 10,
+    "slika": "images/krst4.PNG",
+    "ime": "CROSS Red",
+    "cena": 2.155,
+    "opis": "Krst od belog drveta sa crvenom epoxy smolom",
+    "vidljivost": true
+  },
+  {
+    "id": 11,
+    "slika": "images/pas2.PNG",
+    "ime": "PAW RED",
+    "cena": 1.855,
+    "opis": "Crvena šapa privezak za pse u obliku srca",
+    "vidljivost": true
+  },
+  {
+    "id": 12,
+    "slika": "images/pas5.PNG",
+    "ime": "PUPPY Heart",
+    "cena": 1.855,
+    "opis": "Crvena šapa privezak za pse u obliku srca",
+    "vidljivost": true
+  }
+]
